@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by  Muhammad Sayed  on 1/9/21 9:37 AM
+  ~ Copyright (c) JustClean. All rights reserved.
+  -->
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+        <variable
+                name="viewmodel"
+                type="com.weather.app.ui.navhostactivity.post.WeatherFragVm" />
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/card_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:scaleType="fitCenter"
+                app:cardCornerRadius="@dimen/_7sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_gravity="start|center"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:src="@drawable/search_icon" />
+
+                <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <EditText
+                            android:id="@+id/edt_search"
+                            style="@style/TextAppearance.Text.Regular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="0dp"
+                            android:background="@null"
+                            android:hint="Search by city"
+                            android:imeOptions="actionSearch"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="0dp"
+                            android:scaleType="fitCenter" />
+
+                    <ImageButton
+                            android:id="@+id/btnClear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="4dp"
+                            android:background="@null"
+                            android:tint="@color/lighter_grey"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_clear_black_24dp" />
+                </FrameLayout>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/mSwipeRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <ViewFlipper
+                    android:id="@+id/mViewFlipper"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+
+                <include
+                        android:id="@+id/main_layout_display"
+                        layout="@layout/frag_main_weather"
+                        app:viewmodel="@{viewmodel}" />
+
+                <include layout="@layout/app_loading_screen" />
+
+                <include layout="@layout/app_no_result_found" />
+
+                <include layout="@layout/app_no_internet_connection" />
+
+                <include layout="@layout/app_server_error" />
+            </ViewFlipper>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+</layout>
